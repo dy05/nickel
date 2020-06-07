@@ -1,0 +1,36 @@
+﻿<Page
+    x:Class="Nickel.UWP.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Nickel.UWP"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    Loaded="Page_Loaded"
+    >
+
+    <Grid>
+        <!--<WebView x:Name="wv"/>-->
+        <!--<ListView x:Name="wv" SelectionChanged="wv_SelectionChanged"/>-->
+        
+                <ListView HorizontalAlignment="Left" x:Name="wv" SelectionChanged="wv_SelectionChanged" Height="630" Margin="59,140,0,0" VerticalAlignment="Top" Width="928">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Code}"></TextBlock>
+                            <TextBlock Text="{Binding Nom}"></TextBlock>
+                            <TextBlock Text="{Binding Prix}"></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button Content="Ajouter" x:Name="btnAjouter" HorizontalAlignment="Right" Margin="0,200,179,0" VerticalAlignment="Top" Width="156" Height="56" Click="btnAjouter_Click"/>
+        <Button Content="Actualiser" x:Name="btnActualiser" HorizontalAlignment="Right" Margin="0,320,179,0" VerticalAlignment="Top" Width="156" Height="56" Click="btnActualiser_Click"/>
+        <Button Content="Modifier" Name="btnModifier" HorizontalAlignment="Right" Margin="0,440,179,0" VerticalAlignment="Top" Width="156" Height="56" Click="btnModifier_Click"/>
+        <Button Content="Supprimer" x:Name="btnSupprimer" HorizontalAlignment="Right" Margin="0,560,179,0" VerticalAlignment="Top" Width="156" Height="56" Click="btnSupprimer_Click"/>
+    </Grid>
+</Page>

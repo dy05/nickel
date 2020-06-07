@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="Nickel.Mobile.MainPage">
+    <ContentPage.Resources>
+        <StyleSheet Source="Assets/app.css" />
+    </ContentPage.Resources>
+    <StackLayout Margin="10">
+        <ActivityIndicator x:Name="pg" IsRunning="True" IsVisible="True" 
+            VerticalOptions="Fill"
+            HorizontalOptions="Fill"
+            />
+        <ListView x:Name="lv" ItemsSource="{Binding Products}" IsVisible="False" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Margin="0, 10, 0, 10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="100" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="auto" />
+                                <RowDefinition Height="40" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <!--<Image Source="http://10.10.0.1:81/NickelWeb/Product/GetPhoto/1003"-->
+                            <Image Source="{ Binding Photo}" 
+                                Aspect="AspectFit" 
+                                Grid.Row="0"
+                                />
+                            <Label Text="{Binding Name}" 
+                                FontSize="18"
+                                TextColor="LightBlue"
+                                Grid.Row="1"
+                                />
+                            <Label Text="{Binding PriceWithCurrency}" 
+                                FontSize="20"
+                                TextColor="Red"
+                                Grid.Row="2"
+                                />
+                            <Label Text="{Binding ShortDescription}" 
+                                Grid.Row="3"
+                                />
+                            <StackLayout Grid.Row="4" Orientation="Horizontal">
+                                <Button FontSize="14" BackgroundColor="LightSalmon" Text="View More" />
+                                <Button FontSize="14" BackgroundColor="LightCyan" Text="Buy" />
+                            </StackLayout>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Text="Add Product" x:Name="button" Clicked="Button_Clicked" />
+    </StackLayout>
+
+</ContentPage>

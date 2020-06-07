@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title - Nickel</title>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/css/all.min.css" rel="stylesheet" />
+    <link href="~/css/main.css" rel="stylesheet" />
+    @RenderSection("links", false)
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+                Nickel
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupport"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item @ViewBag.ActiveHome">
+                        <a class="nav-link" href="@Url.Action("Index", "Home")">
+                            Home
+                            @*                            Accueil <span class="sr-only">(current)</span>*@
+                        </a>
+                    </li>
+                    <li class="nav-item @ViewBag.ActiveProduct">
+                        <a class="nav-link" href="@Url.Action("Index", "Product")">
+                            Products
+                        </a>
+                    </li>
+                    <li class="nav-item @ViewBag.ActiveAbout">
+                        <a class="nav-link" href="@Url.Action("About", "Home")">
+                            About Us
+                        </a>
+                    </li>
+                    <li class="nav-item @ViewBag.ActiveContact">
+                        <a class="nav-link" href="@Url.Action("Contact", "Home")">
+                            Contact
+                        </a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item @ViewBag.ActiveCart">
+                        <a class="nav-link" href="@Url.Action("Index", "Cart")">
+                            <i class="fa fa-shopping-cart"></i>
+                            @if (Session["Cart"] != null && ((IEnumerable<object>)Session["Cart"]).Count() > 0)
+                            {
+                                <span style="position: relative; top: -10px; left: -10px; font-size: 10px;"
+                                      class="badge badge-primary">
+                                    @(((IEnumerable<object>)Session["Cart"]).Count())
+                                </span>
+                            }
+                        </a>
+                    </li>
+                    @if (Request.IsAuthenticated)
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="fa fa-user-circle"></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a href="@Url.Action("Edit", "Account")" class="dropdown-item">Edit profil</a>
+                                <div class="dropdown-divider"></div>
+                                <a href="@Url.Action("Logout", "Account")" class="dropdown-item">Log out</a>
+                            </div>
+                            <form action="@Url.Action("Logout", "Account")" method="post">
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item @ViewBag.ActiveAccount">
+                            <a class="nav-link" href="@Url.Action("Index", "Account")">
+                                <i class="fa fa-user-secret"></i>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </nav>
+
+    </header>
+    <main class="py-4">
+        <div class="container">
+            @RenderBody()
+        </div>
+    </main>
+
+    <footer>
+        @*<hr />*@
+        <h3 class="text-center bg-light py-2">
+            Created with <span class="fa fa-heart text-danger"></span> By Dyos !
+        </h3>
+    </footer>
+
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/all.min.js"></script>
+    @RenderSection("scripts", false)
+</body>
+</html>

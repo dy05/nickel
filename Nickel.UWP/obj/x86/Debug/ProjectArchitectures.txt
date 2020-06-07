@@ -1,0 +1,1 @@
+E:\Nickel\ASP\Nickel\Nickel.UWP\Nickel.UWP.csproj;x86

@@ -1,0 +1,45 @@
+﻿@model Nickel.Web.ViewModels.Home.IndexViewModel
+@{
+    ViewBag.Title = "Welcome";
+    ViewBag.ActiveHome = "active";
+}
+
+<h1>Welcome to Nickel !</h1>
+
+<div class="row">
+    @if (Model != null && Model.Products != null && Model.Products.Count() > 0)
+    {
+        <div>
+            @ViewBag.loll
+        </div>
+        foreach (var product in Model.Products)
+        {
+            <div class="col-lg-3">
+                <div class="card">
+                    <img class="card-img-top" src="@Url.Content(product.Photo)" alt="@product.Name">
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Name</h5>
+                        <p class="text-danger"><strong>@product.PriceWithCurrency</strong></p>
+                        <p class="card-text">@product.ShortDescription</p>
+                        <a href="@Url.Action("Details", "Product", new { id = product.Id })" title="View More" class="btn btn-outline-warning">
+                            View More
+                        </a>
+                        <a href="#" class="btn btn-outline-success">
+                            <i class="fa fa-money-check"></i>
+                        </a>
+                        <a href="@Url.Action("Create", "Cart", new {  quantity = 1, id = product.Id, returnUrl = Request.Url.ToString() })" class="btn btn-outline-info">
+                            <i class="fa fa-cart-arrow-down"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="col-lg-12 text-center">
+            <i>Product not found !</i>
+        </div>
+    }
+
+</div>

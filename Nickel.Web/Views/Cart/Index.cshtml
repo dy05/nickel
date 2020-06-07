@@ -1,0 +1,75 @@
+﻿@model Nickel.Web.ViewModels.Cart.IndexViewModel
+@{
+    ViewBag.Title = "Cart";
+    ViewBag.ActiveCart = "active";
+}
+
+@if (Model != null)
+{
+    <div class="row">
+        <div class="col-12">
+            <h2>@ViewBag.Title</h2>
+            @if (Model != null && Model.ProductsCart.Count() > 0)
+            {
+                <table class="table table-bordered" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Photo</th>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var p in Model.ProductsCart)
+                        {
+                            <tr>
+                                <td style="width: 100px;"><img src="@Url.Content(p.Product.Photo)" class="img-fluid rounded" style="width: 100%; height: auto; object-fit: contain;" /></td>
+                                <td>@p.Product.Name</td>
+                                <td class="text-right">
+                                    <form method="get" id="frm@(p.Product.Id)" action="@Url.Action("Edit", "Cart", new { id = p.Product.Id })">
+                                        <input type="number" dir="rtl" class="form-control" name="Quantity" value="@p.Quantity" />
+                                    </form>
+                                </td>
+                                <td class="text-right">@p.Product.Price</td>
+                                <td class="text-right">@p.AmountWithCurrency</td>
+                                <td>
+                                    <a class="btn btn-primary" href="javascript:;" onclick="$('#frm@(p.Product.Id)').submit()">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a class="btn btn-danger" onclick="if (confirm('Do you really want to delete item ?')) window.location.href = '@Url.Action("Delete", "Cart", new { id = p.Product.Id })';" href="javascript:;">
+                                        <i class="fa fa-trash-alt"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" class="text-right">
+                                <strong>@Model.TotalQuantityFormat</strong>
+                            </td>
+                            <td class="text-right">
+                                <strong>@Model.TotalPriceWithCurrency</strong>
+                            </td>
+                            <td class="text-right">
+                                <strong style="color: red; font-size: 16px;">@Model.TotalAmountWithCurrency</strong>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div class="btn btn-success float-right">
+                    <i class="fa fa-money-bill"></i> Purchase
+                </div>
+            }
+            else
+            {
+                <div class="text-center">
+                    <i>Cart is empty !</i>
+                </div>
+            }
+        </div>
+    </div>
+}

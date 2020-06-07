@@ -1,0 +1,74 @@
+﻿@model Nickel.Web.ViewModels.Product.DetailsViewModel
+@{
+    ViewBag.Title = "Product's detail";
+    ViewBag.ActiveProduct = "active";
+}
+
+@if (Model != null)
+{
+    <div class="row">
+        <div class="col-lg-5 col-md-5 mb-3 text-left">
+            <h1>@Model.Product.Name</h1>
+            <div class="card">
+                <img class="card-img-top zoom" src="@Url.Content(Model.Product.Photo)" alt="@Model.Product.Name">
+                <div class="card-body">
+                    <h5 class="card-title">@Model.Product.Name</h5>
+                    <p class="text-danger"><strong>@Model.Product.Price</strong></p>
+                    <p class="card-text">@Model.Product.Description</p>
+                    <a href="#" class="btn btn-outline-success" title="Buy">
+                        <i class="fa fa-money-check"></i>
+                    </a>
+                    <a href="@Url.Action("Create", "Cart", new { quantity = 1, id = Model.Product.Id, returnUrl = Request.Url.ToString() })" title="Add to card" class="btn btn-outline-info">
+                        <i class="fa fa-cart-arrow-down"></i>
+                    </a>
+                    <a href="@Url.Action("Edit", "Product", new { id = Model.Product.Id, returnUrl = Request.Url.ToString() })" title="Edit card" class="btn btn-outline-secondary">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a href="@Url.Action("Delete", "Product", new { id = Model.Product.Id, returnUrl = Request.Url.ToString() })" title="Delete card" class="btn btn-outline-danger">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-7 col-md-7 mt-2">
+            <h2>Same products</h2>
+            @if (Model.SameProducts != null && Model.SameProducts.Count() > 0)
+            {
+                <div class="row">
+                    @foreach (var product in Model.SameProducts)
+                    {
+                        if (product.Id != Model.Product.Id)
+                        {
+                            <div class="col-lg-4 mb-3">
+                                <div class="card">
+                                    <img class="card-img-top" src="@Url.Content(product.Photo)" alt="@product.Name">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@product.Name</h5>
+                                        <p class="text-danger"><strong>@product.Price</strong></p>
+                                        <a href="@Url.Action("Details", "Product", new { id = product.Id })" title="View More" class="btn btn-outline-warning">
+                                            View More
+                                        </a>
+                                        <!--
+                                        <a href="#" class="btn btn-outline-success">
+                                            <i class="fa fa-money-check"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-outline-info">
+                                            <i class="fa fa-cart-arrow-down"></i>
+                                        </a>
+                                        -->
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="text-center">
+                    <i>Not Found !</i>
+                </div>
+            }
+        </div>
+    </div>
+}

@@ -1,0 +1,41 @@
+﻿*, *::after, *::before {
+    box-sizing: border-box;
+}
+body {
+    overflow-x: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+
+header {
+    margin-bottom: 20px;
+}
+
+
+/*
+.card-img-top {
+    object-fit: contain;
+    height: 15vw;
+    width: auto;
+}
+
+*/
+
+.card-img-top {
+    object-fit: contain;
+    height: 15vw;
+    width: auto;
+}
+
+img.zoom {
+    /*width: 100%;
+    height: auto;*/
+}
+
+
+h1, h2 {
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
